@@ -33,4 +33,6 @@ public class ConfigSetup extends ConfigReader {
         return getValue("DB_URL");
     }
 
+    public static String getUrl() {return getValue("URL");}
+
 }

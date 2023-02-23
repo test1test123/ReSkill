@@ -65,6 +65,11 @@ public class RestAssuredFunctions {
                 .delete(uri).then().extract().response();
     }
 
+    public static Response delete(String uri){
+        return given().contentType(ContentType.JSON)
+                .delete(uri);
+    }
+
     public static Response patch(Object body, String token, String uri) {
         String json = new GsonBuilder().setPrettyPrinting().create().toJson(body);
         return given().contentType(ContentType.JSON).header(GlobalParams.AUTHORIZATION, "Bearer " + token).body(json).when()
@@ -80,6 +85,11 @@ public class RestAssuredFunctions {
         String json = new GsonBuilder().setPrettyPrinting().create().toJson(body);
         return given().contentType(ContentType.JSON).header(GlobalParams.AUTHORIZATION, "Bearer " + accessToken).body(json).when()
                 .put(uri).then().extract().response();
+    }
+
+    public static Response put(Object body, String uri) {
+        String json = new GsonBuilder().setPrettyPrinting().create().toJson(body);
+        return given().contentType(ContentType.JSON).body(json).when().put(uri).then().extract().response();
     }
 
    //if it is basic auth

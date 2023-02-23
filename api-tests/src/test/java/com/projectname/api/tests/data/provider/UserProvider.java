@@ -1,6 +1,7 @@
 package com.projectname.api.tests.data.provider;
 
 import com.projectname.api.client.data.model.users.create.CreateUserRequest;
+import com.projectname.api.client.data.model.users.update.UpdateUserRequest;
 import com.projectname.api.client.utils.RandomStringGenerator;
 import com.projectname.api.tests.constants.DataProviderNames;
 import org.testng.annotations.DataProvider;
@@ -19,5 +20,23 @@ public class UserProvider {
                         "QA Automation Engineer")},
         };
     }
+    @DataProvider(name = DataProviderNames.VERIFY_UPDATE_USER)
+    public static Object[][] verifyUpdateUser() {
+        return new Object[][]{
+                {"WithRandomNameAndJob", prepareRandomUpdateUserRequest(), getRandomId()},
+                {"AsQaAutomationEngineer", new UpdateUserRequest("Jason Kidd ",
+                        "QA Automation Engineer"), getRandomId()}
+        };
+    }
 
+    public static UpdateUserRequest prepareRandomUpdateUserRequest() {
+        UpdateUserRequest userRequest = new UpdateUserRequest();
+        userRequest.setJob(RandomStringGenerator.createRandomStringWithLen(5));
+        userRequest.setName(RandomStringGenerator.createRandomStringAlphanumericWithLen(6));
+        return userRequest;
+    }
+
+    public static String getRandomId() {
+        return "2";
+    }
 }
