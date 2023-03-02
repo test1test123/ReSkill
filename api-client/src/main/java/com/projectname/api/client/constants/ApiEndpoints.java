@@ -11,7 +11,9 @@ public class ApiEndpoints {
 
     // CROCODILES
 
-    public static final String LOGIN_USER = "auth/token/login/";
+    public static final String LOGIN_USER = "/auth/token/login/";
+
+
 
     public static final String GET_MY_CROCODILES = "my/crocodiles/";
 

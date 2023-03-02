@@ -21,9 +21,25 @@ public class CrocodileProvider {
         };
     }
 
+
     public static CrocodileRequest prepareCrocodileRequest() {
         CrocodileRequest createCrocodile = new CrocodileRequest(RandomStringGenerator.createRandomStringWithLen(6), RandomStringGenerator.getRandomSex(), Dates.getRandomDate());
         return createCrocodile;
+    }
+
+    public static CrocodileRequest prepareCrocodileRequestWithoutName(){
+        CrocodileRequest createRequest = new CrocodileRequest("",RandomStringGenerator.getRandomSex(), Dates.getRandomDate());
+        return createRequest;
+    }
+
+    public static CrocodileRequest prepareCrocodileRequestWithoutSex(){
+        CrocodileRequest createRequest = new CrocodileRequest("Test","", Dates.getRandomDate());
+        return createRequest;
+    }
+
+    public static CrocodileRequest prepareCrocodileRequestWithoutBirthDate(){
+        CrocodileRequest createRequest = new CrocodileRequest("Test",RandomStringGenerator.getRandomSex(), "");
+        return createRequest;
     }
 
     public static RequiredFieldErrorResponse prepareErrorMessageForSex() {
@@ -31,5 +47,7 @@ public class CrocodileProvider {
         errorResponse.setSex(Arrays.asList(ErrorMessages.FIELD_IS_REQUIRED));
         return errorResponse;
     }
+
+
 
 }

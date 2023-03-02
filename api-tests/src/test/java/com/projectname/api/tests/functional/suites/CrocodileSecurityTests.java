@@ -9,7 +9,6 @@ import com.projectname.api.tests.environment.ConfigSetup;
 import com.projectname.api.tests.functional.asserts.CommonErrorAssert;
 import com.projectname.api.tests.init.TestBase;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 public class CrocodileSecurityTests extends TestBase {
@@ -32,11 +31,40 @@ public class CrocodileSecurityTests extends TestBase {
         commonErrorAssert.assertCrocodileErrorResponse(actualError, new CrocodileErrorResponse(ErrorMessages.NOT_FOUND));
     }
 
-    @Test(dataProvider = DataProviderNames.VERIFY_CANNOT_CREATE_USER_WITHOUT_REQUIRED_FIELD, dataProviderClass = CrocodileProvider.class)
+    @Test(dataProvider = DataProviderNames.VERIFY_CANNOT_CREATE_CROCODILE_WITHOUT_REQUIRED_FIELD, dataProviderClass = CrocodileProvider.class)
     public void verifyCannotCreateCrocodileWithoutRequiredFields(String suffix, CrocodileRequest crocodileRequest, RequiredFieldErrorResponse expectedError) {
         RequiredFieldErrorResponse actualError = CrocodilesAPI.createCrocodileWithRequiredFieldError(accessTokenMainUser, crocodileRequest);
 
         CommonErrorAssert commonErrorAssert = new CommonErrorAssert();
         commonErrorAssert.assertRequiredFieldErrors(actualError, expectedError);
     }
-}
+
+    @Test
+    public void verifyCannotCreateCrocodileWithoutName(){
+        CrocodileRequest crocodileRequest = CrocodileProvider.prepareCrocodileRequestWithoutName();
+        RequiredFieldErrorResponse actualError = CrocodilesAPI.createCrocodileWithRequiredFieldError(accessTokenMainUser, crocodileRequest);
+
+        CommonErrorAssert commonErrorAssert = new CommonErrorAssert();
+        commonErrorAssert.assertErrorCrocodileNameEmpty(actualError, ErrorMessages.FILED_MAY_NOT_BE_BLANK);
+    }
+
+    @Test
+    public void verifyCannotCreateCrocodileWithEmptySex(){
+        CrocodileRequest crocodileRequest = CrocodileProvider.prepareCrocodileRequestWithoutSex();
+        RequiredFieldErrorResponse actualError = CrocodilesAPI.createCrocodileWithRequiredFieldError(accessTokenMainUser, crocodileRequest);
+
+        CommonErrorAssert commonErrorAssert = new CommonErrorAssert();
+        commonErrorAssert.assertErrorCrocodileSexEmpty(actualError, ErrorMessages.NOT_A_VALID_CHOICE);
+    }
+
+    @Test
+    public void verifyCannotCreateCrocodileWithEmptyStringAsBirthDate(){
+        CrocodileRequest crocodileRequest = CrocodileProvider.prepareCrocodileRequestWithoutBirthDate();
+        RequiredFieldErrorResponse actualError = CrocodilesAPI.createCrocodileWithRequiredFieldError(accessTokenMainUser, crocodileRequest);
+
+        CommonErrorAssert commonErrorAssert = new CommonErrorAssert();
+        commonErrorAssert.assertErrorCrocodileDateEmpty(actualError, ErrorMessages.JSON_PARSE_ERROR);
+    }
+
+
+   }
