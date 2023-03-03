@@ -29,7 +29,6 @@ public class CommonErrorAssert {
         this.softAssert.assertEquals(actualError, expectedError);
     }
 
-
     public void assertRequiredFieldErrors(RequiredFieldErrorResponse actualError, RequiredFieldErrorResponse expectedError) {
         if(actualError == null) {
             Assert.fail("Actual error is null");

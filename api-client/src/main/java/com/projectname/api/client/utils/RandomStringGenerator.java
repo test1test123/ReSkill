@@ -3,6 +3,8 @@ package com.projectname.api.client.utils;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.RandomUtils;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 
 public class RandomStringGenerator {
@@ -59,11 +61,12 @@ public class RandomStringGenerator {
         return stringBuilder.toString();
     }
 
-    public static Object getRandomSex() {
-
-        Object genders[] = {"M", "F"};
-
-        return (genders[new Random().nextInt(genders.length)]);
+    public static String getRandomSex() {
+        String[] gender = {"F", "M"};
+        List<String> genders = Arrays.asList(gender);
+        Random rand = new Random();
+        String randomElement = genders.get(rand.nextInt(genders.size()));
+        return randomElement;
     }
 
 }

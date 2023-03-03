@@ -21,6 +21,16 @@ public class CrocodileProvider {
         };
     }
 
+    @DataProvider(name=DataProviderNames.VERIFY_CANNOT_CREATE_CROCODILE_WITH_EMPTY_FIELDS)
+    public static Object[][] verifyCannotCreateCrocodileWithEmptyFields(){
+        return new Object[][]{
+                {"whenNameIsEmptyString", CrocodileProvider.prepareCrocodileRequestWithoutName(), RequiredFieldErrorResponse.prepareErrorForName(Arrays.asList(ErrorMessages.FILED_MAY_NOT_BE_BLANK))},
+                {"whenSexIsEmptyString", CrocodileProvider.prepareCrocodileRequestWithoutSex(), RequiredFieldErrorResponse.prepareErrorForSex(Arrays.asList(ErrorMessages.NOT_A_VALID_CHOICE))},
+                {"whenDateOfBirthIsEmptyString", CrocodileProvider.prepareCrocodileRequestWithoutBirthDate(), RequiredFieldErrorResponse.prepareErrorForDate(Arrays.asList(ErrorMessages.WRONG_DATE_FORMAT))}
+
+        };
+    }
+
 
     public static CrocodileRequest prepareCrocodileRequest() {
         CrocodileRequest createCrocodile = new CrocodileRequest(RandomStringGenerator.createRandomStringWithLen(6), RandomStringGenerator.getRandomSex(), Dates.getRandomDate());
