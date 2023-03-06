@@ -18,7 +18,7 @@ public class CrocodileSecurityTests extends TestBase {
     @BeforeClass
     public void prepareDataForTest() {
         accessTokenMainUser = CrocodilesAPI.loginUser(new LoginRequest(ConfigSetup.getMainUser(), ConfigSetup.getPass())).getAccess();
-        //accessTokenSecondUser = CrocodilesAPI.loginUser(new LoginRequest(ConfigSetup.getSecondUser(), ConfigSetup.getPass())).getAccess();
+
     }
 
     @Test

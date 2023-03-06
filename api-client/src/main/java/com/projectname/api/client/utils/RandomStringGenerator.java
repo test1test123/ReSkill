@@ -62,8 +62,7 @@ public class RandomStringGenerator {
     }
 
     public static String getRandomSex() {
-        String[] gender = {"F", "M"};
-        List<String> genders = Arrays.asList(gender);
+        List<String> genders = Arrays.asList("F", "M");
         Random rand = new Random();
         String randomElement = genders.get(rand.nextInt(genders.size()));
         return randomElement;
