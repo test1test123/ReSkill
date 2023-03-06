@@ -9,7 +9,6 @@ import com.projectname.api.tests.environment.ConfigSetup;
 import com.projectname.api.tests.functional.asserts.CommonErrorAssert;
 import com.projectname.api.tests.init.TestBase;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 public class CrocodileSecurityTests extends TestBase {
@@ -19,7 +18,7 @@ public class CrocodileSecurityTests extends TestBase {
     @BeforeClass
     public void prepareDataForTest() {
         accessTokenMainUser = CrocodilesAPI.loginUser(new LoginRequest(ConfigSetup.getMainUser(), ConfigSetup.getPass())).getAccess();
-        accessTokenSecondUser = CrocodilesAPI.loginUser(new LoginRequest(ConfigSetup.getSecondUser(), ConfigSetup.getPass())).getAccess();
+
     }
 
     @Test
@@ -32,11 +31,21 @@ public class CrocodileSecurityTests extends TestBase {
         commonErrorAssert.assertCrocodileErrorResponse(actualError, new CrocodileErrorResponse(ErrorMessages.NOT_FOUND));
     }
 
-    @Test(dataProvider = DataProviderNames.VERIFY_CANNOT_CREATE_USER_WITHOUT_REQUIRED_FIELD, dataProviderClass = CrocodileProvider.class)
+    @Test(dataProvider = DataProviderNames.VERIFY_CANNOT_CREATE_CROCODILE_WITHOUT_REQUIRED_FIELD, dataProviderClass = CrocodileProvider.class)
     public void verifyCannotCreateCrocodileWithoutRequiredFields(String suffix, CrocodileRequest crocodileRequest, RequiredFieldErrorResponse expectedError) {
         RequiredFieldErrorResponse actualError = CrocodilesAPI.createCrocodileWithRequiredFieldError(accessTokenMainUser, crocodileRequest);
 
         CommonErrorAssert commonErrorAssert = new CommonErrorAssert();
         commonErrorAssert.assertRequiredFieldErrors(actualError, expectedError);
     }
-}
+
+
+    @Test(dataProvider =DataProviderNames.VERIFY_CANNOT_CREATE_CROCODILE_WITH_EMPTY_FIELDS, dataProviderClass = CrocodileProvider.class)
+    public void verifyCannotCreateCrocodileWithEmptyFields(String suffix, CrocodileRequest crocodileRequest, RequiredFieldErrorResponse expectedError){
+        RequiredFieldErrorResponse actualErrorResponse = CrocodilesAPI.createCrocodileWithRequiredFieldError(accessTokenMainUser, crocodileRequest);
+
+        CommonErrorAssert commonErrorAssert = new CommonErrorAssert();
+        commonErrorAssert.assertRequiredFieldErrors(actualErrorResponse, expectedError);
+    }
+
+   }

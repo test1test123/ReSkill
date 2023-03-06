@@ -3,6 +3,10 @@ package com.projectname.api.client.utils;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.RandomUtils;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
+
 public class RandomStringGenerator {
 
     public static int createRandomWholeNumber(final int minValue, final int maxValue) {
@@ -55,6 +59,13 @@ public class RandomStringGenerator {
         stringBuilder.append(".");
         stringBuilder.append(createRandomStringAlphabeticWithLen(3));
         return stringBuilder.toString();
+    }
+
+    public static String getRandomSex() {
+        List<String> genders = Arrays.asList("F", "M");
+        Random rand = new Random();
+        String randomElement = genders.get(rand.nextInt(genders.size()));
+        return randomElement;
     }
 
 }

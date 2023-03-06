@@ -17,6 +17,18 @@ public class CommonErrorAssert {
         this.softAssert.assertAll();
     }
 
+    public void assertErrorCrocodileNameEmpty (RequiredFieldErrorResponse actualError, String expectedError){
+        this.softAssert.assertEquals(actualError, expectedError);
+    }
+
+    public void assertErrorCrocodileSexEmpty(RequiredFieldErrorResponse actualError, String expectedError) {
+        this.softAssert.assertEquals(actualError, expectedError);
+    }
+
+    public void assertErrorCrocodileDateEmpty(RequiredFieldErrorResponse actualError, String expectedError) {
+        this.softAssert.assertEquals(actualError, expectedError);
+    }
+
     public void assertRequiredFieldErrors(RequiredFieldErrorResponse actualError, RequiredFieldErrorResponse expectedError) {
         if(actualError == null) {
             Assert.fail("Actual error is null");
