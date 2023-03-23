@@ -86,4 +86,17 @@ public class NavigationBarPage extends PageBase {
         getCompanyButton().click();
         return new CompanyPage(driver,url, email, password);
     }
+
+    private WebElement getLoginButton(){
+        try {
+            return driver.findElement(CustomBy.xpath("//*[@id=\"loginSignup\"]/li[1]/a"));
+        } catch (Exception e){
+            throw new AssertionError("Could not find Login button", e);
+        }
+    }
+
+    public PhpLoginPage openLoginPage(){
+        getLoginButton().click();
+        return new PhpLoginPage(driver, url, email,password);
+    }
 }
