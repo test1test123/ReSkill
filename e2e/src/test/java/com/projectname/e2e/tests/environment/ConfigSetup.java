@@ -13,7 +13,7 @@ public class ConfigSetup extends ConfigReader {
         String currentEnv = System.getProperty("environment");
         System.out.println(currentEnv);
         String env = currentEnv != null && !currentEnv.isEmpty() ? currentEnv : TEST;
-        String base_url = "https://phptravels.com/";
+        String base_url = "https://abstracta.us/blog/software-testing/best-demo-websites-for-practicing-different-types-of-software-tests/";
         System.out.println(base_url);
         return base_url;
     }
